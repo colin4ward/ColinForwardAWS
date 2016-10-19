@@ -33,8 +33,11 @@ html
 		//- Add any other template-specific HEAD tags by extending the head block
 		block head
 
+
 	//- HTML BODY
 	body
+
+		
 
 		//- HEADER
 		#header: .container
@@ -104,6 +107,19 @@ html
 		if user && user.canAccessKeystone
 			script(src='/keystone/js/content/editor.js')
 
+		script.
+			var lastName =  !{JSON.stringify(user.name.last)}
+			var firstName = !{JSON.stringify(user.name.first)}
+			var userEmail = !{JSON.stringify(user.email)}
+			
+			window.intercomSettings = {
+				"app_id": "ifs9i0in",
+				"name": lastName + " " + firstName, // Full name
+				"email": userEmail, // Email address
+				"created_at": Date.now() // Signup date as a Unix timestamp
+			};
+
+			(function(){var w=window;var ic=w.Intercom;if(typeof ic==="function"){ic('reattach_activator');ic('update',intercomSettings);}else{var d=document;var i=function(){i.c(arguments)};i.q=[];i.c=function(args){i.q.push(args)};w.Intercom=i;function l(){var s=d.createElement('script');s.type='text/javascript';s.async=true;s.src='https://widget.intercom.io/widget/ifs9i0in';var x=d.getElementsByTagName('script')[0];x.parentNode.insertBefore(s,x);}if(w.attachEvent){w.attachEvent('onload',l);}else{w.addEventListener('load',l,false);}}})()
 		//- Add scripts that are globally required by your site here.
 
 		//- Include template-specific javascript files by extending the js block
