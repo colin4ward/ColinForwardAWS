@@ -1,43 +1,600 @@
 extends ../layouts/default
 
 block content
-	.container: .jumbotron
-		img(src='/images/logo.svg', width='160')
-		h1 Welcome
-		p This is your new <a href='http://keystonejs.com' target='_blank'>KeystoneJS</a> website.
-		p It includes the latest versions of
-			| <a href='http://getbootstrap.com/' target='_blank'>Bootstrap</a>
-			| and <a href='http://www.jquery.com/' target='_blank'>jQuery</a>.
-		p Visit the <a href='http://keystonejs.com/guide' target='_blank'>Getting Started</a> guide to learn how to customise it.
-		hr
-		if user && user.canAccessKeystone
-			p
-				a(href='/keystone').btn.btn-lg.btn-primary Open the Admin UI
-		else
-			p We have created a default Admin user for you with the email <strong>me@colinforward.com</strong> and the password <strong>admin</strong>.
-			p
-				a(href='/keystone/signin', style='margin-right: 10px').btn.btn-lg.btn-primary Sign in
-				|  to use the Admin UI.
-		hr
-		p Remember to <a href='https://github.com/keystonejs/keystone' target='_blank'>Star KeystoneJS on GitHub</a> and
-			| <a href='https://twitter.com/keystonejs' target='_blank'>follow @keystonejs</a> on twitter for updates.
-	.container: .jumbotron
-		img(src='/images/logo.svg', width='160')
-		h1 Welcome
-		p This is your new <a href='http://keystonejs.com' target='_blank'>KeystoneJS</a> website.
-		p It includes the latest versions of
-			| <a href='http://getbootstrap.com/' target='_blank'>Bootstrap</a>
-			| and <a href='http://www.jquery.com/' target='_blank'>jQuery</a>.
-		p Visit the <a href='http://keystonejs.com/guide' target='_blank'>Getting Started</a> guide to learn how to customise it. #{userEmail}  
-		hr
-		if user && user.canAccessKeystone
-			p
-				a(href='/keystone').btn.btn-lg.btn-primary Open the Admin UI
-		else
-			p We have created a default Admin user for you with the email <strong>me@colinforward.com</strong> and the password <strong>admin</strong>.
-			p
-				a(href='/keystone/signin', style='margin-right: 10px').btn.btn-lg.btn-primary Sign in
-				|  to use the Admin UI.
-		hr
-		p Remember to <a href='https://github.com/keystonejs/keystone' target='_blank'>Star KeystoneJS on GitHub</a> and
-			| <a href='https://twitter.com/keystonejs' target='_blank'>follow @keystonejs</a> on twitter for updates.
+	//- HEADER
+	#header: .container
+
+	//- Customise your site's navigation by changing the navLinks Array in ./routes/middleware.js
+	//- ... or completely change this header to suit your design.
+
+	div(role="navigation").nav-bar
+		.nav-bar-inner
+			.navigation
+				
+
+				ul.nav-left
+					each link in navLinks
+						li(class=(section == link.key ? 'active' : null)): a(href=link.href)= link.label
+				ul.nav-right
+					if user
+						if user.canAccessKeystone
+							li: a(href='/keystone') Admin
+							li: a(href='/keystone/signout') Sign Out
+						else
+							li: a(href='/keystone/signin') Sign In
+	// Content
+	.content.clearfix
+		// Fullscreen Slider Section
+		section.section-block.featured-media.window-height.tm-slider-parallax-container
+			.tm-slider-container.full-width-slider(data-featured-slider='', data-parallax='', data-parallax-fade-out='', data-animation='scaleOut', data-speed='1200', data-scale-under='960')
+				ul.tms-slides
+					li.tms-slide(data-image='', data-force-fit='', data-overlay-bkg-color='#000000', data-overlay-bkg-opacity='0.0', data-nav-dark='')
+						.tms-content
+							.tms-content-inner.center.v-align-middle
+								.row
+									.column.width-6.offset-1.color-black
+										h1.tms-caption.lspacing-large.weight-bold.text-uppercase.no-margin-bottom(data-animate-in='preset:slideInDownShort;duration:600ms;delay:200ms;', data-no-scale='data-no-scale')  Colin Forward
+										.clear
+										p.tms-caption.weight-light.text-uppercase.lspacing-medium.hide-on-mobile(data-animate-in='preset:slideInDownShort;duration:600ms;delay:100ms;', data-no-scale='data-no-scale') Technology | Marketing | Digital Media
+						img(data-src='images/Photos/Colin_Forward.jpg', data-retina='', src='images/Colin_Forward@2x.jpg', alt='')
+					li.tms-slide(data-image='', data-force-fit='', data-overlay-bkg-color='#000000', data-overlay-bkg-opacity='0.1', data-nav-dark='')
+						.tms-content
+							.tms-content-inner.center.v-align-middle
+								.row
+									.column.width-6.offset-6.color-black
+										h1.tms-caption.lspacing-large.weight-bold.text-uppercase.no-margin-bottom(data-animate-in='preset:slidslieInDownShort;duration:400ms;delay:200ms;', data-no-scale='data-no-scale') Digital Marketing
+										.clear
+										p.tms-caption.weight-light.text-uppercase.lspacing-medium.hide-on-mobile(data-animate-in='preset:slideInDownShort;duration:400ms;delay:100ms;', data-no-scale='data-no-scale') Websites And Social Media
+						img(data-src='images/Photos/HeroWeb.jpg', data-retina='', src='images/HeroWeb@2x.jpg', alt='')
+					li.tms-slide(data-image='', data-force-fit='', data-overlay-bkg-color='#000000', data-overlay-bkg-opacity='0.1', data-nav-dark='')
+						.tms-content
+							.tms-content-inner.center.v-align-middle
+								.row
+									.column.width-6.offset-3.color-black
+										h1.tms-caption.lspacing-large.weight-bold.text-uppercase.no-margin-bottom(data-animate-in='preset:slideInDownShort;duration:400ms;delay:200ms;', data-no-scale='data-no-scale') Photography
+										.clear
+										p.tms-caption.weight-light.text-uppercase.lspacing-medium.hide-on-mobile(data-animate-in='preset:slideInDownShort;duration:400ms;delay:100ms;', data-no-scale='data-no-scale') Sports and Corporate
+						img(data-src='images/Photos/Hero2.jpg', data-retina='', src='images/Hero2@2x.jpg', alt='')
+					li.tms-slide(data-image='', data-force-fit='', data-overlay-bkg-color='#000000', data-overlay-bkg-opacity='0.0', data-nav-dark='')
+						.tms-content
+							.tms-content-inner.center.v-align-middle
+								.row
+									.column.width-6.offset-1.color-black
+										h1.tms-caption.lspacing-large.weight-bold.text-uppercase.no-margin-bottom(data-animate-in='preset:slideInDownShort;duration:600ms;delay:500ms;', data-no-scale='data-no-scale')  Portraits
+										.clear
+										p.tms-caption.weight-light.text-uppercase.lspacing-medium.hide-on-mobile(data-animate-in='preset:slideInDownShort;duration:600ms;delay:300ms;', data-no-scale='data-no-scale') + Engagement and Family photo
+						img(data-src='images/Photos/Sarah_Peerani.jpg', data-retina='', src='images/Sarah_Peerani@2x.jpg', alt='')
+		// Fullscreen Slider Section End
+		// Client Section Custom
+		.section-block.logos-1.pt-50.pb-10.bkg-grey-ultralight.color-charcoal
+			.row
+				.column.width-3.center-on-mobile
+					h3.mb-5.mb-mobile-30 Brands I Manage
+				.column.width-9
+					.row.content-grid-3
+						.grid-item
+							a(href='http://allogy.com')
+								img(src='images/logos/allogy-logo-dark_Square.png', data-animate-in='preset:slideInUpShort;duration:600ms;delay:100ms;', alt='')
+						.grid-item
+							a(href='http://www.mobilecare.io')
+								img(src='images/logos/mobilecare-logo-dark.png', alt='')
+						.grid-item
+							a(href='http://www.healthinnovators.info')
+								img(src='images/logos/HealthInnovators.png', alt='')
+		.section-block.clients-1.replicable-content.bkg-grey-ultralight
+			.row.flex
+				.column.width-3
+					h3.mb-50 Groups I've worked with
+				.column.width-9
+					.row.content-grid-3.flex(data-animate-in='preset:slideInLeftShort;duration:600ms;delay:100ms;')
+						.grid-item
+							h5.client-name Jackson Health System
+							span.client-description.font-alt-1 Behavioral Health App
+						.grid-item
+							h5.client-name University of Miami
+							span.client-description.font-alt-1 Mobile Electronic Health Records
+						.grid-item
+							h5.client-name Deloitte
+							span.client-description.font-alt-1 Online Training for Military Contractors
+						.grid-item
+							h5.client-name AWSI
+							| 								  Event Photography
+						.grid-item
+							h5.client-name USDA
+							span.client-description.font-alt-1 Mobile Data Collection
+						.grid-item
+							h5.client-name Centra Care
+							span.client-description.font-alt-1 Patient Appointments App
+						.grid-item
+							h5.client-name McGraw Hill
+							span.client-description.font-alt-1 Interactive Textbook Apps
+						.grid-item
+							h5.client-name Kenya Institute of Education
+							span.client-description.font-alt-1 Mobile Learning
+						.grid-item
+							h5.client-name Guidewell
+							span.client-description.font-alt-1 Innovation Coaching
+		// Client Section Custom End
+		// Hero Section 5
+		section.section-block.hero-5.clear-height.right.bkg-grey.color-white.pt-50.pb-50
+			.media-column.width-6
+			.row
+				.column.width-5
+					.hero-content.split-hero-content
+						.hero-content-inner.left.horizon(data-animate-in='preset:slideInRightShort;duration:1000ms;', data-threshold='0.5')
+							h3
+								| "So what is it that you actually 
+								strong do?
+								| "
+							p.mb-5
+								| I get that 
+								i a lot.
+								|  Here's a quick list...
+							.accordion.xlarge
+								ul.list-group
+									li.active
+										a(href='#accordion-content-1')
+											span.icon-line-graph
+											| Business Development
+										#accordion-content-1
+											.accordion-content
+												| I am the SVP of 
+												u
+													a(href='http://allogy.com') Allogy Interactive
+												|  and 
+												b the product owner
+												|  for a suite of healthcare apps called 
+												u
+													a(href='http://wwwmobilecare.io')  MobileCare
+												| . We're getting ready to launch an app for dialectical behavior therapy - the gold standard treatment for borderline personality disorder, and substance abuse.
+									li
+										a(href='#accordion-content-2')
+											span.icon-network
+											| Community Building
+										#accordion-content-2
+											.accordion-content
+												| I am the 
+												b Founder
+												|  of 
+												u
+													a(href='http://healthinnovators.info')  Health Innovators
+												| , an organization that brings together clinicians and innovators to solve problems in Healthcare. We are the largest healthcare meetup in the Southeast, hosting 
+												u
+													a(href='meetup.com/flhealth') monthly events
+												|  in Orlando and Miami that feature innovative physicians, entrepreneurs, and technologists.
+									li
+										a(href='#accordion-content-3')
+											span.icon-camera
+											| Photography
+										#accordion-content-3
+											.accordion-content
+												| I'm a 
+												b photographer
+												| , shooting for hire and for fun. Check out some of my work in the gallery below!
+									li
+										a(href='#accordion-content-4')
+											span.icon-edit
+											| Writing
+										#accordion-content-3
+											.accordion-content
+												| Once upon a time I was a journalism student. I've been published from time to time and have been known to write for hire. Need help with copy writting or document design?
+								|                                     If you'd like to hire me, or just want to get in touch, 
+								a(href='#contactform')
+									u CLICK HERE
+		// Marketing portfolio
+		section
+			#content-slider.section-block.pt-30
+				.row
+					.column.width-10.offset-1.center
+						h1.mb-50 Marketing Services
+						.tm-slider-container.content-slider(data-animation='slide', data-scale-min-height='100', data-scale-under='960', data-width='1250', data-height='800')
+							ul.tms-slides
+								li.tms-slide(data-image='', data-force-fit='', data-overlay-bkg-color='#000000', data-overlay-bkg-opacity='0.1')
+									.tms-content
+										.tms-content-inner.center
+											.row
+												.column.width-10.offset-1
+													h3.tms-caption.title-large.color-white.lspacing-medium.mb-5.bkg-charcoal.mb-mobile-30(data-animate-in='preset:slideInLeftShort;duration:1000ms;', data-no-scale='')
+														| Responsive Websites
+									img(data-src='images/Marketing/Artboard_1.png', data-retina='', src='images/Marketing/Artboard_1@2X.png', alt='')
+								li.tms-slide(data-image='', data-force-fit='', data-overlay-bkg-color='#000000', data-overlay-bkg-opacity='0.1')
+									.tms-content
+										.tms-content-inner.center
+											.row
+												.column.width-10.offset-1
+													h3.tms-caption.title-large.color-white.lspacing-medium.mb-5.bkg-charcoal.opacity-08.mb-mobile-30(data-animate-in='preset:scaleOut;duration:1000ms;', data-no-scale='')
+														| Marketing Automation
+									img(data-src='images/Marketing/automation.png', data-retina='', src='images/Marketing/automation.png', alt='')
+								li.tms-slide(data-image='', data-force-fit='', data-overlay-bkg-color='#000000', data-overlay-bkg-opacity='0.1')
+									.tms-content
+										.tms-content-inner.center
+											.row
+												.column.width-10.offset-1
+													h3.tms-caption.title-large.color-white.lspacing-medium.mb-5.bkg-charcoal.mb-mobile-30(data-animate-in='preset:spinInY;duration:1000ms;', data-no-scale='data-no-scale') social media
+									img(data-src='images/Marketing/slide-1-fs.jpg', data-retina='', src='images/Marketing/slide-1-fs.jpg', alt='')
+		// end Marketing Portfolio
+		// Portfolio Grid
+		.section-block.grid-filter-menu.pt-110.right.left-on-mobile.bkg-black
+			.row.no-padding
+				.column.width-6.left
+					h2.mb-mobile-50.color-white Photo Portfolio
+				.column.width-6.color-white
+					ul
+						li
+							a.active(href='#', data-filter='*') All
+						li
+							a(href='#', data-filter='.portraits') Portraits
+						li
+							a(href='#', data-filter='.events') Events
+						li
+							a(href='#', data-filter='.animals') Animals
+						li
+							a(href='#', data-filter='.sports') Sports
+		.section-block.grid-container.fade-in-progressively.small-margins.no-padding-top(style='background-color:#000000', data-layout-mode='masonry', data-grid-ratio='1.5', data-animate-filter-duration='700', data-set-dimensions='', data-animate-resize='', data-animate-resize-duration='0')
+			.row
+				.column.width-12
+					.row.grid.content-grid-3
+						.grid-item.grid-sizer.portrait.sports
+							.thumbnail.img-scale-in(data-hover-easing='easeInOut', data-hover-speed='500', data-hover-bkg-color='#000000', data-hover-bkg-opacity='0.4')
+								a.overlay-link.lightbox-link(data-group='gallery-1', data-image-url='images/photo-studio/portfolio/grid/small-margins/Nicholi_Rogatkin-portrait.jpg', href='images/photo-studio/portfolio/grid/small-margins/Nicholi_Rogatkin-lightbox.jpg')
+									img(src='images/photo-studio/portfolio/grid/small-margins/Nicholi_Rogatkin-portrait.jpg')
+									span.overlay-info.v-align-bottom.left
+										span
+											span
+												span.text-line.bkg-white.mb-10
+												span.project-title Nicholi Rogatkin
+												span.project-description Colorado Freestyle Fest
+						.grid-item.portraits
+							.thumbnail.img-scale-in(data-hover-easing='easeInOut', data-hover-speed='500', data-hover-bkg-color='#000000', data-hover-bkg-opacity='0.4')
+								a.overlay-link.lightbox-link(data-group='gallery-1', data-image-url='http://sartre.thememountain.com/images/photo-studio/portfolio/grid/small-margins/project-9-lightbox.jpg', href='images/photo-studio/portfolio/grid/small-margins/project-9-lightbox.jpg')
+									img(src='images/photo-studio/portfolio/grid/small-margins/project-9-landscape.jpg', alt='')
+									span.overlay-info.v-align-bottom.left
+										span
+											span
+												span.text-line.bkg-white.mb-10
+												span.project-title Child Portrait
+												span.project-description Marietta, GA
+						.grid-item.portraits
+							.thumbnail.img-scale-in(data-hover-easing='easeInOut', data-hover-speed='500', data-hover-bkg-color='#000000', data-hover-bkg-opacity='0.4')
+								a.overlay-link.lightbox-link(data-group='gallery-1', data-image-url='http://sartre.thememountain.com/images/photo-studio/portfolio/grid/small-margins/Zach_Tetreault-lightbox.jpg', href='images/photo-studio/portfolio/grid/small-margins/Zach_Tetreault-lightbox.jpg')
+									img(src='images/photo-studio/portfolio/grid/small-margins/Zach_Tetreault-landscape.jpg', alt='')
+									span.overlay-info.v-align-bottom.left
+										span
+											span
+												span.text-line.bkg-white.mb-10
+												span.project-title Zach Tetreault
+												span.project-description Hundred Waters
+						.grid-item.sports
+							.thumbnail.img-scale-in(data-hover-easing='easeInOut', data-hover-speed='500', data-hover-bkg-color='#000000', data-hover-bkg-opacity='0.4')
+								a.overlay-link.lightbox-link(data-group='gallery-1', data-image-url='http://sartre.thememountain.com/images/photo-studio/portfolio/grid/small-margins/Paul_Genovese.jpg', href='images/photo-studio/portfolio/grid/small-margins/Paul_Genovese.jpg')
+									img(src='images/photo-studio/portfolio/grid/small-margins/Paul_Genovese-grid.jpg', alt='')
+									span.overlay-info.v-align-bottom.left
+										span
+											span
+												span.text-line.bkg-white.mb-10
+												span.project-title Paul Genovese
+												span.project-description Colorado Freestyle Fest
+						.grid-item.animals
+							.thumbnail.img-scale-in(data-hover-easing='easeInOut', data-hover-speed='500', data-hover-bkg-color='#000000', data-hover-bkg-opacity='0.4')
+								#Spoonbill
+									a.overlay-link.lightbox-link(data-group='gallery-1', data-image-url='http://sartre.thememountain.com/images/photo-studio/portfolio/grid/small-margins/DSC_0188-2.jpg', href='images/photo-studio/portfolio/grid/small-margins/DSC_0188-2.jpg')
+										img(src='images/photo-studio/portfolio/grid/small-margins/DSC_0188-2.jpg', alt='')
+										span.overlay-info.v-align-bottom.left
+											span
+												span
+													span.text-line.bkg-white.mb-10
+													span.project-title Roseate Spoonbill
+													span.project-description Clearwater, FL
+						.grid-item.portraits
+							.thumbnail.img-scale-in(data-hover-easing='easeInOut', data-hover-speed='500', data-hover-bkg-color='#000000', data-hover-bkg-opacity='0.4')
+								a.overlay-link.lightbox-link(data-group='gallery-1', data-image-url='http://sartre.thememountain.com/images/photo-studio/portfolio/grid/small-margins/project-5-lightbox.jpg', href='images/photo-studio/portfolio/grid/small-margins/project-5-lightbox.jpg')
+									img(src='images/photo-studio/portfolio/grid/small-margins/project-5-landscape.jpg', alt='')
+									span.overlay-info.v-align-bottom.left
+										span
+											span
+												span.text-line.bkg-white.mb-10
+												span.project-title Robert Palestina
+												span.project-description FORM Arcosanti
+						.grid-item.portraits
+							.thumbnail.img-scale-in(data-hover-easing='easeInOut', data-hover-speed='500', data-hover-bkg-color='#000000', data-hover-bkg-opacity='0.4')
+								a.overlay-link.lightbox-link(data-group='gallery-1', data-image-url='http://sartre.thememountain.com/images/photo-studio/portfolio/grid/small-margins/project-4-lightbox.jpg', href='images/photo-studio/portfolio/grid/small-margins/project-4-lightbox.jpg')
+									img(src='images/photo-studio/portfolio/grid/small-margins/project-4-landscape.jpg', alt='')
+									span.overlay-info.v-align-bottom.left
+										span
+											span
+												span.text-line.bkg-white.mb-10
+												span.project-title Nina Talley
+												span.project-description For Health Innovators
+						.grid-item.wide.events
+							.thumbnail.img-scale-in(data-hover-easing='easeInOut', data-hover-speed='500', data-hover-bkg-color='#000000', data-hover-bkg-opacity='0.4')
+								a.overlay-link.lightbox-link(data-group='gallery-1', data-image-url='images/photo-studio/portfolio/grid/small-margins/Pulse_Orlando-lightbox.jpg', href='images/photo-studio/portfolio/grid/small-margins/Pulse_Orlando-lightbox.jpg')
+									img(src='images/photo-studio/portfolio/grid/small-margins/Pulse_Orlando-wide.jpg', alt='')
+									span.overlay-info.v-align-bottom.left
+										span
+											span
+												span.text-line.bkg-white.mb-10
+												span.project-title Pulse Vigil, 06/13/16
+												span.project-description Orlando, FL
+						.grid-item.sports
+							.thumbnail.img-scale-in(data-hover-easing='easeInOut', data-hover-speed='500', data-hover-bkg-color='#000000', data-hover-bkg-opacity='0.4')
+								a.overlay-link.lightbox-link(data-group='gallery-1', data-image-url='http://sartre.thememountain.com/images/photo-studio/portfolio/grid/small-margins/IMG_1884.png', href='images/photo-studio/portfolio/grid/small-margins/IMG_1884.png')
+									img(src='images/photo-studio/portfolio/grid/small-margins/IMG_1884.png', alt='')
+									span.overlay-info.v-align-bottom.left
+										span
+											span
+												span.text-line.bkg-white.mb-10
+												span.project-title Tommy Redding
+												span.project-description Orlando City Soccer
+						.grid-item.portrait.nature
+							.thumbnail.img-scale-in(data-hover-easing='easeInOut', data-hover-speed='500', data-hover-bkg-color='#000000', data-hover-bkg-opacity='0.4')
+								a.overlay-link.lightbox-link(data-group='gallery-1', data-image-url='http://sartre.thememountain.com/images/photo-studio/portfolio/grid/small-margins/project-1-lightbox.jpg', href='images/photo-studio/portfolio/grid/small-margins/project-1-lightbox.jpg')
+									img(src='images/photo-studio/portfolio/grid/small-margins/project-1-portrait.jpg', alt='')
+									span.overlay-info.v-align-bottom.left
+										span
+											span
+												span.text-line.bkg-white.mb-10
+												span.project-title Cliff Hanger
+												span.project-description Boulder, CO
+						.grid-item.portraits
+							.thumbnail.img-scale-in(data-hover-easing='easeInOut', data-hover-speed='500', data-hover-bkg-color='#000000', data-hover-bkg-opacity='0.4')
+								a.overlay-link.lightbox-link(data-group='gallery-1', data-image-url='http://sartre.thememountain.com/images/photo-studio/portfolio/grid/small-margins/project-8-lightbox.jpg', href='images/photo-studio/portfolio/grid/small-margins/project-8-lightbox.jpg')
+									img(src='images/photo-studio/portfolio/grid/small-margins/project-8-landscape.jpg', alt='')
+									span.overlay-info.v-align-bottom.left
+										span
+											span
+												span.text-line.bkg-white.mb-10
+												span.project-title New Addition
+												span.project-description Altamonte, FL
+						.grid-item.portraits.animals
+							.thumbnail.img-scale-in(data-hover-easing='easeInOut', data-hover-speed='500', data-hover-bkg-color='#000000', data-hover-bkg-opacity='0.4')
+								a.overlay-link.lightbox-link(data-group='gallery-1', data-image-url='http://sartre.thememountain.com/images/photo-studio/portfolio/grid/small-margins/project-2-lightbox.jpg', href='images/photo-studio/portfolio/grid/small-margins/project-2-lightbox.jpg')
+									img(src='images/photo-studio/portfolio/grid/small-margins/project-2-landscape.jpg', alt='')
+									span.overlay-info.v-align-bottom.left
+										span
+											span
+												span.text-line.bkg-white.mb-10
+												span.project-title Marley
+												span.project-description Orlando, FL
+						.grid-item.sports
+							.thumbnail.img-scale-in(data-hover-easing='easeInOut', data-hover-speed='500', data-hover-bkg-color='#000000', data-hover-bkg-opacity='0.4')
+								a.overlay-link.lightbox-link(data-group='gallery-1', data-image-url='images/photo-studio/portfolio/grid/small-margins/IMG_1776.png', href='images/photo-studio/portfolio/grid/small-margins/IMG_1776-lightbox.jpg')
+									img(src='images/photo-studio/portfolio/grid/small-margins/IMG_1776.png', alt='')
+									span.overlay-info.v-align-bottom.left
+										span
+											span
+												span.text-line.bkg-white.mb-10
+												span.project-title Earl Edwards Jr.
+												span.project-description Orlando City Soccer
+						.grid-item.wide.Animals
+							.thumbnail.img-scale-in(data-hover-easing='easeInOut', data-hover-speed='500', data-hover-bkg-color='#000000', data-hover-bkg-opacity='0.4')
+								a.overlay-link.lightbox-link(data-group='gallery-1', data-image-url='images/photo-studio/portfolio/grid/small-margins/tortoise-wide.jpg', href='images/photo-studio/portfolio/grid/small-margins/tortoise-wide.jpg')
+									img(src='images/photo-studio/portfolio/grid/small-margins/tortoise-wide.jpg', alt='')
+									span.overlay-info.v-align-bottom.left
+										span
+											span
+												span.text-line.bkg-white.mb-10
+												span.project-title Tortoise
+												span.project-description Crescent Beach, FL
+						.grid-item.events
+							.thumbnail.img-scale-in(data-hover-easing='easeInOut', data-hover-speed='500', data-hover-bkg-color='#000000', data-hover-bkg-opacity='0.4')
+								a.overlay-link.lightbox-link(data-group='gallery-1', data-image-url='http://sartre.thememountain.com/images/photo-studio/portfolio/grid/small-margins/IMG_9236.jpg', href='images/photo-studio/portfolio/grid/small-margins/IMG_9236.jpg')
+									img(src='images/photo-studio/portfolio/grid/small-margins/IMG_9236.jpg', alt='')
+									span.overlay-info.v-align-bottom.left
+										span
+											span
+												span.text-line.bkg-white.mb-10
+												span.project-title Stardust Lounge
+												span.project-description For Nerd Nite
+						.grid-item.events
+							.thumbnail.img-scale-in(data-hover-easing='easeInOut', data-hover-speed='500', data-hover-bkg-color='#000000', data-hover-bkg-opacity='0.4')
+								a.overlay-link.lightbox-link(data-group='gallery-1', data-image-url='http://sartre.thememountain.com/images/photo-studio/portfolio/grid/IMG_8348-2.jpg', href='images/photo-studio/portfolio/grid/small-margins/IMG_8348-2.jpg')
+									img(src='images/photo-studio/portfolio/grid/small-margins/IMG_8348-2.jpg', alt='')
+									span.overlay-info.v-align-bottom.left
+										span
+											span
+												span.text-line.bkg-white.mb-10
+												span.project-title Bikes + Brews Tour
+												span.project-description For Local Motive
+						.grid-item.sports
+							.thumbnail.img-scale-in(data-hover-easing='easeInOut', data-hover-speed='500', data-hover-bkg-color='#000000', data-hover-bkg-opacity='0.4')
+								a.overlay-link.lightbox-link(data-group='gallery-1', data-image-url='http://sartre.thememountain.com/images/photo-studio/portfolio/grid/Hero5.jpg', href='images/photo-studio/portfolio/grid/small-margins/Hero5.jpg')
+									img(src='images/photo-studio/portfolio/grid/small-margins/Hero5.jpg', alt='')
+									span.overlay-info.v-align-bottom.left
+										span
+											span
+												span.text-line.bkg-white.mb-10
+												span.project-title Front Flip
+												span.project-description Colorado Freestyle Fest
+		// Portfolio Grid End
+		// Hero Section 5 End
+		#contactform.section-block.contact-1.bkg-grey-ultralight
+			.row
+				.column.width-12
+					h2 Get In Touch
+					.contact-form-container
+						form.contact-form(action='php/send-email.php', method='post', novalidate='')
+							.row
+								.column.width-6
+									input.form-fname.form-element.large.rounded(type='text', name='fname', placeholder='First Name*', tabindex='1', required='')
+								.column.width-6
+									input.form-lname.form-element.large.rounded(type='text', name='lname', placeholder='Last Name', tabindex='2')
+								.column.width-6
+									input.form-email.form-element.large.rounded(type='email', name='email', placeholder='Email Address*', tabindex='3', required='')
+								.column.width-6
+									input.form-website.form-element.large.rounded(type='text', name='website', placeholder='Phone Number', tabindex='4')
+								.column.width-6
+									input.form-honeypot.form-element.large.rounded(type='text', name='honeypot')
+							.row
+								.column.width-12
+									textarea.form-message.form-element.large.rounded(name='message', placeholder='Message*', tabindex='5', required='')
+									.clear
+									input.form-submit.large.button.rounded.bkg-blue-light.bkg-hover-navy.color-white.color-hover-white(type='submit', value='Send Email')
+						.form-response
+		//
+			Team Grid
+			<div class="section-block bkg-charcoal">
+			<div class="row">
+			<div class="column width-4 color-white">
+			<h3 class="mb-50">/.About</h3>
+			</div>
+			<div class="column width-8 color-white">
+			<div class="row">
+			<div class="column width-6">
+			<p class="mb-50">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.</p>
+			</div>
+			<div class="column width-6">
+			<p class="mb-50">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia volupta.</p>
+			</div>
+			</div>
+			</div>
+			<div class="column width-12">
+			<div class="section-block bkg-charcoal grid-container fade-in-progressively small-margins no-padding" data-layout-mode="masonry" data-grid-ratio="1.5" data-animate-filter-duration="700" data-set-dimensions data-animate-resize data-animate-resize-duration="0">
+			<div class="row">
+			<div class="column width-12">
+			<div class="row grid content-grid-3">
+			<div class="grid-item grid-sizer large">
+			<div class="thumbnail">
+			<img src="images/photo-studio/generic/team-member-2.jpg" alt=""/>
+			</div>
+			<div class="content-outer">
+			<div class="content-inner v-align-bottom left color-charcoal">
+			<div class="row">
+			<div class="column width-5">
+			<img src="images/logos/signature-grid-4.svg" alt="" />
+			<p class="no-margin-bottom">New York City, 2014.</p>
+			</div>
+			</div>
+			</div>
+			</div>
+			</div>
+			<div class="grid-item portrait">
+			<div class="thumbnail">
+			<img src="images/photo-studio/generic/team-member-1-portrait.jpg" width="760" height="1047" alt=""/>
+			</div>
+			<div class="content-outer">
+			<div class="content-inner color-white">
+			<div class="row">
+			<div class="column width-4 offset-4 center">
+			<a href="http://player.vimeo.com/video/63952497?autoplay=1&amp;color=a09283" data-twitter-user="thememountainco" data-image-url="http://marquez.thememountain.com/boxed/images/photo-studio/portfolio/project-5/mobile-app-3.jpg" data-caption="This is a lightbox caption for the video playing" class="lightbox-link icon-play icon-circled border-white color-white color-hover-white bkg-hover-theme circled small"></a>
+			</div>
+			</div>
+			</div>
+			</div>
+			</div>
+			</div>
+			</div>
+			</div>
+			</div>
+			</div>
+			</div>
+			</div>
+			Team Grid End
+		//
+			Sign Up Section 1
+			<section class="section-block signup-1">
+			<div class="row">
+			<div class="column width-6 offset-3 center">
+			<h3 class="mb-30">Sign up and get the latest news from Sartre:</h3>
+			<div class="signup-form-container">
+			<form class="signup-form" action="php/subscribe.php" method="post" novalidate>
+			<div class="row">
+			<div class="column width-9">
+			<div class="field-wrapper">
+			<input type="email" name="email" class="form-email form-element no-padding-left no-padding-right center-on-mobile" placeholder="Email address*" tabindex="2" required>
+			</div>
+			</div>
+			<div class="column width-3 center">
+			<input type="submit" value="Signup" class="form-submit button bkg-charcoal bkg-hover-charcoal color-white color-hover-white">
+			</div>
+			</div>
+			<input type="text" name="honeypot" class="form-honeypot form-element">
+			</form>
+			<div class="form-response show"></div>
+			</div>
+			</div>
+			</div>
+			</section>
+			Sign Up Section 1 End
+		//
+			Call to Action Section
+			<div class="section-block replicable-content pt-60 pb-30 call-to-action-2 call-to-action-2-1 bkg-grey-ultralight background-cover">
+			<div class="row">
+			<div class="column width-6 offset-3 center">
+			<p class="text-uppercase"><a data-content="inline" data-toolbar="" data-networks="twitter;pinterest" data-modal-mode data-modal-width="600" data-lightbox-animation="fade" href="#signup-lightbox" class="lightbox-link color-white color-hover-theme" href="#">Join Our Newsletter</a></p>
+			</div>
+			</div>
+			</div>
+			Call to Action Section End
+		// Testimonial Section 2
+		// Testimonial Section 2 End
+		//
+			Signup Modal
+			<div id="signup-lightbox" class="signup-1 pt-70 pb-50 hide">
+			<div class="row">
+			<div class="column width-12 center">
+			<h2 class="mb-30">Join Our Newsletter:</h2>
+			<div class="signup-form-container">
+			<form class="signup-form" action="php/subscribe.php" method="post" novalidate>
+			<div class="row">
+			<div class="column width-9">
+			<div class="field-wrapper">
+			<input type="email" name="email" class="form-email form-element no-padding-left no-padding-right" placeholder="Email address*" tabindex="2" required>
+			</div>
+			</div>
+			<div class="column width-3 center">
+			<input type="submit" value="Signup" class="form-submit button bkg-charcoal bkg-hover-charcoal color-white color-hover-white">
+			</div>
+			</div>
+			<input type="text" name="honeypot" class="form-honeypot form-element">
+			</form>
+			<div class="form-response show"></div>
+			</div>
+			</div>
+			</div>
+			</div>
+			Signup Modal End
+	// Content End
+	// Footer
+	footer.footer
+		.footer-top
+			.row.flex
+				.column.width-3
+					.widget
+						h4.widget-title
+							strong Explore
+							br
+							| My work
+				.column.width-4
+					.widget
+						ul
+							li
+								a(href='#') Allogy
+							li
+								a(href='#') MobileCare
+							li
+								a(href='#') Health Innovators
+							li
+								a(href='#contactform') Get In Touch
+				.column.width-5.right.left-on-mobile
+					.widget
+						ul.social-list.list-horizontal
+							li
+								a(href='http://instagram.com/colin4ward')
+									span.icon-instagram.small
+							li
+								a(href='http://twitter.com/colin4ward')
+									span.icon-twitter.small
+							li
+								a(href='http://facebook.com/colin4ward')
+									span.icon-facebook.small
+							li
+								a(href='https://www.linkedin.com/in/colinforward')
+									span.icon-linkedin.small
+						p.copyright
+							| All photography is the property of 
+							br
+							| Colin Forward
+							br
+					a(href='https://mixpanel.com/f/partner', rel='nofollow')
+						img(src='//cdn.mxpnl.com/site_media/images/partner/badge_light.png', alt='Mobile Analytics')
+	// Footer End

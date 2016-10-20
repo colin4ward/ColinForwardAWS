@@ -5,17 +5,25 @@ html
 
 	//- HTML HEADER
 	head
-		meta(charset="utf-8")
-		meta(name="viewport", content="width=device-width, initial-scale=1.0")
-		meta(http-equiv="X-UA-Compatible" content="IE=edge")
-
-		title= title || 'ColinForwardAWS'
-		link(rel="shortcut icon", href="/favicon.ico", type="image/x-icon")
-
-		//- Customise the stylesheet for your site by editing /public/styles/site.less
-		//- All .less files will be automatically compiled and minified in production.
-		link(href="/styles/site.min.css", rel="stylesheet")
-
+			meta(charset='UTF-8')
+			meta(content='width=device-width,initial-scale=1.0,maximum-scale=1.0', name='viewport')
+			meta(name='twitter:widgets:theme', content='light')
+			meta(property='og:title', content='Portfolio Site')
+			meta(property='og:type', content='website')
+			meta(property='og:image', content='images/Photos/Hero.jpg')
+			meta(property='og:description', content='Entrepreneur, Photographer, Technologist')
+			title Colin Forward Portfolio Site
+			link(rel='shortcut icon', type='image/x-icon', href='images/C.ico')
+			// Font
+			link(href='https://fonts.googleapis.com/css?family=Raleway:300,400,600%7CLato:300,400,700', rel='stylesheet', type='text/css')
+			// Css
+			link(rel='stylesheet', href='css/core.min.css')
+			link(rel='stylesheet', href='css/skin-photo-studio.css')
+			//if lt IE 9
+				script(type='text/javascript', src='http://html5shiv.googlecode.com/svn/trunk/html5.js')
+			script(type='text/javascript', src='http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js')
+			script(type='text/javascript', src='js/jquery.tm.retinize.js')
+			
 		//- This file provides the default styling for the KeystoneJS Content Editor
 		if user && user.canAccessKeystone
 			link(href="/keystone/styles/content/editor.min.css", rel="stylesheet")
@@ -39,32 +47,7 @@ html
 
 		
 
-		//- HEADER
-		#header: .container
 
-			//- Customise your site's navigation by changing the navLinks Array in ./routes/middleware.js
-			//- ... or completely change this header to suit your design.
-
-			div(role="navigation").navbar.navbar-default
-				.container-fluid
-					.navbar-header
-						button.navbar-toggle(type='button', data-toggle='collapse', data-target='.navbar-collapse')
-							span.sr-only Toggle navigation
-							span.icon-bar
-							span.icon-bar
-							span.icon-bar
-						a.navbar-brand(href='/') ColinForwardAWS
-					.collapse.navbar-collapse
-						ul.nav.navbar-nav.navbar-left
-							each link in navLinks
-								li(class=(section == link.key ? 'active' : null)): a(href=link.href)= link.label
-						ul.nav.navbar-nav.navbar-right
-							if user
-								if user.canAccessKeystone
-									li: a(href='/keystone') Open Keystone
-								li: a(href='/keystone/signout') Sign Out
-							else
-								li: a(href='/keystone/signin') Sign In
 
 		//- BODY
 		#body
@@ -124,3 +107,22 @@ html
 
 		//- Include template-specific javascript files by extending the js block
 		block js
+			script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js')
+			script(src='http://maps.googleapis.com/maps/api/js?v=3')
+			script(src='js/timber.master.min.js')
+			script.
+				function triggerIntercomStuff(value) {
+					console.log('Here is the value of the attribute passed to triggerIntercomStuff', value);
+					window.Intercom("trackEvent", "colins_awesome_event", {
+					"img_path": value
+					});
+				}
+				$(document).on("click", ".lightbox-link", function() {
+					console.log('this is the element you clicked', $(this));
+					triggerIntercomStuff($(this).attr('data-image-url'));
+				
+					analytics.identify('f4ca124298', {
+					name: lastName + " " + firstName,
+					email: userEmail
+				});
+				});
